@@ -57,6 +57,13 @@ app.get("/health", (c) =>
 // 5 requests / 15s / IP — a real user can fail-typo a few times but a script
 // will hit the cap quickly. Bump the limit or move to Upstash Redis when
 // going multi-instance.
+app.post("/auth/login", async (c) => {
+  return c.json({
+    debug: true,
+    message: "POST /api/auth/login reached Hono"
+  });
+});
+
 app.use(
   "/auth/login",
   rateLimit({ capacity: 5, refillPerSecond: 5 / 15 }),
