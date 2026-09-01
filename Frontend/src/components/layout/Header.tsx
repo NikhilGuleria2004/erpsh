@@ -1,11 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Bell, Menu, LogOut } from "lucide-react";
+import { Bell, Menu, LogOut, Moon, Sun } from "lucide-react";
 import { PRIMARY_NAV, SECONDARY_NAV } from "@/lib/constants";
 import { SearchInput } from "@/components/ui/Input";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { useAuth } from "@/lib/useAuth";
+import { useTheme } from "@/lib/useTheme";
 import { useState } from "react";
 
 function usePageTitle(): string {
@@ -19,6 +20,7 @@ export function Header() {
   const title = usePageTitle();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { user, logout } = useAuth();
+  const { theme, toggleTheme, ready } = useTheme();
 
   const initials = user
     ? user.name
@@ -47,6 +49,18 @@ export function Header() {
       </div>
 
       <div className="ml-auto flex items-center gap-2">
+        <button
+          onClick={toggleTheme}
+          className="rounded-md p-1.5 text-text-secondary hover:bg-surface-alt hover:text-text-primary"
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {ready && theme === "dark" ? (
+            <Sun className="h-4.5 w-4.5" strokeWidth={1.75} />
+          ) : (
+            <Moon className="h-4.5 w-4.5" strokeWidth={1.75} />
+          )}
+        </button>
         <button
           className="relative rounded-md p-1.5 text-text-secondary hover:bg-surface-alt hover:text-text-primary"
           aria-label="Notifications"

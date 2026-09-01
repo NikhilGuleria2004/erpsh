@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "tsx watch src/dev-server.ts",
     "build": "tsc --noEmit",
-    "seed": "tsx scripts/seed.ts",
+    "seed": "tsx scripts/seed-users.ts",
+    "seed:full": "tsx scripts/seed.ts",
     "lint": "eslint .",
     "smoke": "tsx scripts/smoke.ts"
   },

@@ -25,6 +25,31 @@
   --danger-soft: #F7E9E6;
 }
 
+.dark {
+  --bg: #0F1115;
+  --surface: #171A21;
+  --surface-alt: #1F232C;
+  --border: #2A2F3A;
+  --border-strong: #3A4150;
+
+  --text-primary: #ECECEC;
+  --text-secondary: #A0A4AD;
+  --text-tertiary: #6E727B;
+
+  --accent: #6FA0D6;
+  --accent-hover: #87B2DF;
+  --accent-soft: #1B2A3D;
+
+  --positive: #5BB987;
+  --positive-soft: #163527;
+
+  --warning: #E0B05A;
+  --warning-soft: #3A2E13;
+
+  --danger: #E0746B;
+  --danger-soft: #3A1E1B;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);

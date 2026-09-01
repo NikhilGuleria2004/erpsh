@@ -36,6 +36,29 @@ export default function LoginPage() {
     }
   };
 
+  const doQuickLogin = async (role: "admin" | "manager" | "employee") => {
+    setSubmitting(true);
+    setError(null);
+    const emailForRole =
+      role === "admin"
+        ? "admin@ledgerly.example"
+        : role === "manager"
+          ? "manager@ledgerly.example"
+          : "employee@ledgerly.example";
+    try {
+      await login(emailForRole, "ChangeMe123!");
+      router.replace("/dashboard");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError("Could not sign in. Please try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-bg px-4">
       <div className="w-full max-w-[400px]">
@@ -89,6 +112,43 @@ export default function LoginPage() {
                 {submitting ? "Signing in..." : "Sign in"}
               </Button>
             </form>
+            <div className="flex flex-col gap-2 border-t border-border pt-3">
+              <p className="text-[12px] text-text-tertiary">
+                Development quick login (uses the seeded demo accounts).
+              </p>
+              <div className="grid grid-cols-1 gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  disabled={submitting}
+                  onClick={() => doQuickLogin("admin")}
+                  className="w-full"
+                >
+                  Test as Admin
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  disabled={submitting}
+                  onClick={() => doQuickLogin("manager")}
+                  className="w-full"
+                >
+                  Test as Manager
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  disabled={submitting}
+                  onClick={() => doQuickLogin("employee")}
+                  className="w-full"
+                >
+                  Test as Employee
+                </Button>
+              </div>
+            </div>
           </CardBody>
         </Card>
         <p className="mt-4 text-center text-[12px] text-text-tertiary">
