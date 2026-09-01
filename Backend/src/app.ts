@@ -62,6 +62,14 @@ app.use(
   rateLimit({ capacity: 5, refillPerSecond: 5 / 15 }),
 );
 
+app.all("/debug/*", (c) => {
+  return c.json({
+    url: c.req.url,
+    path: c.req.path,
+    method: c.req.method,
+  });
+});
+
 app.route("/auth", authRoutes);
 app.route("/users", userRoutes);
 app.route("/products", productRoutes);
